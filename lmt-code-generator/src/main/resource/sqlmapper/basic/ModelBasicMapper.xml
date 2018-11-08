@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baosight.audit.service.persistence.mapper.ab.TAbtrAuthMapper">
+    <resultMap type="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth" id="tAbtrAuth">
+        <result column="AUTH_GUID" property="authGuid" jdbcType="" javaType="" typeHandler=""/>
+
+    </resultMap>
+
+    <select id="query" resultMap="TAbtrAuth" parameterType="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth">
+        select
+        AUTH_GUID as "authGuid"
+        ,   WORKPLAN_GUID as "workplanGuid"
+        ,   REFER_TASK_GUID as "referTaskGuid"
+        ,   ROW_ORDER as "rowOrder"
+        ,   EXTRA1 as "extra1"
+        ,   EXTRA2 as "extra2"
+        ,   EXTRA3 as "extra3"
+        ,   EXTRA4 as "extra4"
+        ,   EXTRA5 as "extra5"
+        ,   EXTRA6 as "extra6"
+        ,   EXTRA7 as "extra7"
+        ,   EXTRA8 as "extra8"
+        ,   EXTRA9 as "extra9"
+        ,   EXTRA10 as "extra10"
+        ,   ORG_GUID as "orgGuid"
+        ,   ORG_CODE as "orgCode"
+        ,   ORG_NAME as "orgName"
+        ,   CREATE_DATE as "createDate"
+        ,   UPDATE_DATE as "updateDate"
+        ,   DELETE_DATE as "deleteDate"
+        ,   CREATE_USER_LABEL as "createUserLabel"
+        ,   UPDATE_USER_LABEL as "updateUserLabel"
+        ,   DELETE_USER_LABEL as "deleteUserLabel"
+        ,   CREATE_USER_NAME as "createUserName"
+        ,   UPDATE_USER_NAME as "updateUserName"
+        ,   DELETE_USER_NAME as "deleteUserName"
+        ,   RECORD_VERSION as "recordVersion"
+        from ${projectSchema}T_ABTR_AUTH
+        <where>
+            <if test="authGuid!=null and authGuid!=''">and  AUTH_GUID=#{authGuid}</if>
+            <if test="workplanGuid!=null and workplanGuid!=''">and  WORKPLAN_GUID=#{workplanGuid}</if>
+            <if test="referTaskGuid!=null and referTaskGuid!=''">and  REFER_TASK_GUID=#{referTaskGuid}</if>
+            <if test="rowOrder!=null and rowOrder!=''">and  ROW_ORDER=#{rowOrder}</if>
+            <if test="extra1!=null and extra1!=''">and  EXTRA1=#{extra1}</if>
+            <if test="extra2!=null and extra2!=''">and  EXTRA2=#{extra2}</if>
+            <if test="extra3!=null and extra3!=''">and  EXTRA3=#{extra3}</if>
+            <if test="extra4!=null and extra4!=''">and  EXTRA4=#{extra4}</if>
+            <if test="extra5!=null and extra5!=''">and  EXTRA5=#{extra5}</if>
+            <if test="extra6!=null and extra6!=''">and  EXTRA6=#{extra6}</if>
+            <if test="extra7!=null and extra7!=''">and  EXTRA7=#{extra7}</if>
+            <if test="extra8!=null and extra8!=''">and  EXTRA8=#{extra8}</if>
+            <if test="extra9!=null and extra9!=''">and  EXTRA9=#{extra9}</if>
+            <if test="extra10!=null and extra10!=''">and  EXTRA10=#{extra10}</if>
+            <if test="orgGuid!=null and orgGuid!=''">and  ORG_GUID=#{orgGuid}</if>
+            <if test="orgCode!=null and orgCode!=''">and  ORG_CODE=#{orgCode}</if>
+            <if test="orgName!=null and orgName!=''">and  ORG_NAME=#{orgName}</if>
+            <if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+            <if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+            <if test="deleteDate!=null">and  DELETE_DATE=#{deleteDate}</if>
+            <if test="createUserLabel!=null and createUserLabel!=''">and  CREATE_USER_LABEL=#{createUserLabel}</if>
+            <if test="updateUserLabel!=null and updateUserLabel!=''">and  UPDATE_USER_LABEL=#{updateUserLabel}</if>
+            <if test="deleteUserLabel!=null and deleteUserLabel!=''">and  DELETE_USER_LABEL=#{deleteUserLabel}</if>
+            <if test="createUserName!=null and createUserName!=''">and  CREATE_USER_NAME=#{createUserName}</if>
+            <if test="updateUserName!=null and updateUserName!=''">and  UPDATE_USER_NAME=#{updateUserName}</if>
+            <if test="deleteUserName!=null and deleteUserName!=''">and  DELETE_USER_NAME=#{deleteUserName}</if>
+            <if test="recordVersion!=null">and  RECORD_VERSION=#{recordVersion}</if>
+        </where>
+    </select>
+
+    <select id="queryOrderBy" resultMap="TAbtrAuth">
+        select
+        AUTH_GUID as "authGuid"
+        ,   WORKPLAN_GUID as "workplanGuid"
+        ,   REFER_TASK_GUID as "referTaskGuid"
+        ,   ROW_ORDER as "rowOrder"
+        ,   EXTRA1 as "extra1"
+        ,   EXTRA2 as "extra2"
+        ,   EXTRA3 as "extra3"
+        ,   EXTRA4 as "extra4"
+        ,   EXTRA5 as "extra5"
+        ,   EXTRA6 as "extra6"
+        ,   EXTRA7 as "extra7"
+        ,   EXTRA8 as "extra8"
+        ,   EXTRA9 as "extra9"
+        ,   EXTRA10 as "extra10"
+        ,   ORG_GUID as "orgGuid"
+        ,   ORG_CODE as "orgCode"
+        ,   ORG_NAME as "orgName"
+        ,   CREATE_DATE as "createDate"
+        ,   UPDATE_DATE as "updateDate"
+        ,   DELETE_DATE as "deleteDate"
+        ,   CREATE_USER_LABEL as "createUserLabel"
+        ,   UPDATE_USER_LABEL as "updateUserLabel"
+        ,   DELETE_USER_LABEL as "deleteUserLabel"
+        ,   CREATE_USER_NAME as "createUserName"
+        ,   UPDATE_USER_NAME as "updateUserName"
+        ,   DELETE_USER_NAME as "deleteUserName"
+        ,   RECORD_VERSION as "recordVersion"
+        from ${projectSchema}T_ABTR_AUTH
+        <where>
+            <if test="param.authGuid!=null and param.authGuid!=''">and  AUTH_GUID=#{param.authGuid}</if>
+            <if test="param.workplanGuid!=null and param.workplanGuid!=''">and  WORKPLAN_GUID=#{param.workplanGuid}</if>
+            <if test="param.referTaskGuid!=null and param.referTaskGuid!=''">and  REFER_TASK_GUID=#{param.referTaskGuid}</if>
+            <if test="param.rowOrder!=null and param.rowOrder!=''">and  ROW_ORDER=#{param.rowOrder}</if>
+            <if test="param.extra1!=null and param.extra1!=''">and  EXTRA1=#{param.extra1}</if>
+            <if test="param.extra2!=null and param.extra2!=''">and  EXTRA2=#{param.extra2}</if>
+            <if test="param.extra3!=null and param.extra3!=''">and  EXTRA3=#{param.extra3}</if>
+            <if test="param.extra4!=null and param.extra4!=''">and  EXTRA4=#{param.extra4}</if>
+            <if test="param.extra5!=null and param.extra5!=''">and  EXTRA5=#{param.extra5}</if>
+            <if test="param.extra6!=null and param.extra6!=''">and  EXTRA6=#{param.extra6}</if>
+            <if test="param.extra7!=null and param.extra7!=''">and  EXTRA7=#{param.extra7}</if>
+            <if test="param.extra8!=null and param.extra8!=''">and  EXTRA8=#{param.extra8}</if>
+            <if test="param.extra9!=null and param.extra9!=''">and  EXTRA9=#{param.extra9}</if>
+            <if test="param.extra10!=null and param.extra10!=''">and  EXTRA10=#{param.extra10}</if>
+            <if test="param.orgGuid!=null and param.orgGuid!=''">and  ORG_GUID=#{param.orgGuid}</if>
+            <if test="param.orgCode!=null and param.orgCode!=''">and  ORG_CODE=#{param.orgCode}</if>
+            <if test="param.orgName!=null and param.orgName!=''">and  ORG_NAME=#{param.orgName}</if>
+            <if test="param.createDate!=null">and param.CREATE_DATE=#{param.createDate}</if>
+            <if test="param.updateDate!=null">and param.UPDATE_DATE=#{param.updateDate}</if>
+            <if test="param.deleteDate!=null">and param.DELETE_DATE=#{param.deleteDate}</if>
+            <if test="param.createUserLabel!=null and param.createUserLabel!=''">and  CREATE_USER_LABEL=#{param.createUserLabel}</if>
+            <if test="param.updateUserLabel!=null and param.updateUserLabel!=''">and  UPDATE_USER_LABEL=#{param.updateUserLabel}</if>
+            <if test="param.deleteUserLabel!=null and param.deleteUserLabel!=''">and  DELETE_USER_LABEL=#{param.deleteUserLabel}</if>
+            <if test="param.createUserName!=null and param.createUserName!=''">and  CREATE_USER_NAME=#{param.createUserName}</if>
+            <if test="param.updateUserName!=null and param.updateUserName!=''">and  UPDATE_USER_NAME=#{param.updateUserName}</if>
+            <if test="param.deleteUserName!=null and param.deleteUserName!=''">and  DELETE_USER_NAME=#{param.deleteUserName}</if>
+            <if test="param.recordVersion!=null">and param.RECORD_VERSION=#{param.recordVersion}</if>
+        </where>
+        <if test="sortField!=null and sortField!=''">
+            <choose>
+                <when test="sortOrder!=null and sortOrder!=''">
+                    order by ${sortField} ${sortOrder}
+                </when>
+                <otherwise>
+                    order by ${sortField} asc
+                </otherwise>
+            </choose>
+        </if>
+    </select>
+
+
+    <select id="load" resultMap="TAbtrAuth">
+        select
+        * from ${projectSchema}T_ABTR_AUTH
+        where
+        AUTH_GUID=#{authGuid}
+    </select>
+
+    <select id="count" resultType="long" parameterType="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth">
+        select
+        count(1) from ${projectSchema}T_ABTR_AUTH
+        <where>
+            <if test="authGuid!=null and authGuid!=''">and  AUTH_GUID=#{authGuid}</if>
+            <if test="workplanGuid!=null and workplanGuid!=''">and  WORKPLAN_GUID=#{workplanGuid}</if>
+            <if test="referTaskGuid!=null and referTaskGuid!=''">and  REFER_TASK_GUID=#{referTaskGuid}</if>
+            <if test="rowOrder!=null and rowOrder!=''">and  ROW_ORDER=#{rowOrder}</if>
+            <if test="extra1!=null and extra1!=''">and  EXTRA1=#{extra1}</if>
+            <if test="extra2!=null and extra2!=''">and  EXTRA2=#{extra2}</if>
+            <if test="extra3!=null and extra3!=''">and  EXTRA3=#{extra3}</if>
+            <if test="extra4!=null and extra4!=''">and  EXTRA4=#{extra4}</if>
+            <if test="extra5!=null and extra5!=''">and  EXTRA5=#{extra5}</if>
+            <if test="extra6!=null and extra6!=''">and  EXTRA6=#{extra6}</if>
+            <if test="extra7!=null and extra7!=''">and  EXTRA7=#{extra7}</if>
+            <if test="extra8!=null and extra8!=''">and  EXTRA8=#{extra8}</if>
+            <if test="extra9!=null and extra9!=''">and  EXTRA9=#{extra9}</if>
+            <if test="extra10!=null and extra10!=''">and  EXTRA10=#{extra10}</if>
+            <if test="orgGuid!=null and orgGuid!=''">and  ORG_GUID=#{orgGuid}</if>
+            <if test="orgCode!=null and orgCode!=''">and  ORG_CODE=#{orgCode}</if>
+            <if test="orgName!=null and orgName!=''">and  ORG_NAME=#{orgName}</if>
+            <if test="createDate!=null">and  CREATE_DATE=#{createDate}</if>
+            <if test="updateDate!=null">and  UPDATE_DATE=#{updateDate}</if>
+            <if test="deleteDate!=null">and  DELETE_DATE=#{deleteDate}</if>
+            <if test="createUserLabel!=null and createUserLabel!=''">and  CREATE_USER_LABEL=#{createUserLabel}</if>
+            <if test="updateUserLabel!=null and updateUserLabel!=''">and  UPDATE_USER_LABEL=#{updateUserLabel}</if>
+            <if test="deleteUserLabel!=null and deleteUserLabel!=''">and  DELETE_USER_LABEL=#{deleteUserLabel}</if>
+            <if test="createUserName!=null and createUserName!=''">and  CREATE_USER_NAME=#{createUserName}</if>
+            <if test="updateUserName!=null and updateUserName!=''">and  UPDATE_USER_NAME=#{updateUserName}</if>
+            <if test="deleteUserName!=null and deleteUserName!=''">and  DELETE_USER_NAME=#{deleteUserName}</if>
+            <if test="recordVersion!=null">and  RECORD_VERSION=#{recordVersion}</if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth">
+        update ${projectSchema}T_ABTR_AUTH
+        <set>
+            <if test="workplanGuid!=null">WORKPLAN_GUID = #{workplanGuid},</if>
+            <if test="referTaskGuid!=null">REFER_TASK_GUID = #{referTaskGuid},</if>
+            <if test="rowOrder!=null">ROW_ORDER = #{rowOrder},</if>
+            <if test="extra1!=null">EXTRA1 = #{extra1},</if>
+            <if test="extra2!=null">EXTRA2 = #{extra2},</if>
+            <if test="extra3!=null">EXTRA3 = #{extra3},</if>
+            <if test="extra4!=null">EXTRA4 = #{extra4},</if>
+            <if test="extra5!=null">EXTRA5 = #{extra5},</if>
+            <if test="extra6!=null">EXTRA6 = #{extra6},</if>
+            <if test="extra7!=null">EXTRA7 = #{extra7},</if>
+            <if test="extra8!=null">EXTRA8 = #{extra8},</if>
+            <if test="extra9!=null">EXTRA9 = #{extra9},</if>
+            <if test="extra10!=null">EXTRA10 = #{extra10},</if>
+            <if test="orgGuid!=null">ORG_GUID = #{orgGuid},</if>
+            <if test="orgCode!=null">ORG_CODE = #{orgCode},</if>
+            <if test="orgName!=null">ORG_NAME = #{orgName},</if>
+            <if test="createDate!=null">CREATE_DATE = #{createDate},</if>
+            <if test="updateDate!=null">UPDATE_DATE = #{updateDate},</if>
+            <if test="deleteDate!=null">DELETE_DATE = #{deleteDate},</if>
+            <if test="createUserLabel!=null">CREATE_USER_LABEL = #{createUserLabel},</if>
+            <if test="updateUserLabel!=null">UPDATE_USER_LABEL = #{updateUserLabel},</if>
+            <if test="deleteUserLabel!=null">DELETE_USER_LABEL = #{deleteUserLabel},</if>
+            <if test="createUserName!=null">CREATE_USER_NAME = #{createUserName},</if>
+            <if test="updateUserName!=null">UPDATE_USER_NAME = #{updateUserName},</if>
+            <if test="deleteUserName!=null">DELETE_USER_NAME = #{deleteUserName},</if>
+            <if test="recordVersion!=null">RECORD_VERSION = #{recordVersion},</if>
+        </set>
+        where
+        AUTH_GUID=#{authGuid}
+    </update>
+
+    <insert id="insert" parameterType="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth">
+        insert  into ${projectSchema}T_ABTR_AUTH (				AUTH_GUID
+        ,WORKPLAN_GUID
+        ,REFER_TASK_GUID
+        ,ROW_ORDER
+        ,EXTRA1
+        ,EXTRA2
+        ,EXTRA3
+        ,EXTRA4
+        ,EXTRA5
+        ,EXTRA6
+        ,EXTRA7
+        ,EXTRA8
+        ,EXTRA9
+        ,EXTRA10
+        ,ORG_GUID
+        ,ORG_CODE
+        ,ORG_NAME
+        ,CREATE_DATE
+        ,UPDATE_DATE
+        ,DELETE_DATE
+        ,CREATE_USER_LABEL
+        ,UPDATE_USER_LABEL
+        ,DELETE_USER_LABEL
+        ,CREATE_USER_NAME
+        ,UPDATE_USER_NAME
+        ,DELETE_USER_NAME
+        ,RECORD_VERSION
+        )
+        values(		#{authGuid}
+        ,#{workplanGuid}
+        ,#{referTaskGuid}
+        ,#{rowOrder}
+        ,#{extra1}
+        ,#{extra2}
+        ,#{extra3}
+        ,#{extra4}
+        ,#{extra5}
+        ,#{extra6}
+        ,#{extra7}
+        ,#{extra8}
+        ,#{extra9}
+        ,#{extra10}
+        ,#{orgGuid}
+        ,#{orgCode}
+        ,#{orgName}
+        ,#{createDate}
+        ,#{updateDate}
+        ,#{deleteDate}
+        ,#{createUserLabel}
+        ,#{updateUserLabel}
+        ,#{deleteUserLabel}
+        ,#{createUserName}
+        ,#{updateUserName}
+        ,#{deleteUserName}
+        ,#{recordVersion}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="com.baosight.audit.service.persistence.entity.ab.TAbtrAuth">
+        delete from T_ABTR_AUTH
+        <where>		<if test="authGuid!=null and authGuid!=''"> and AUTH_GUID=#{authGuid} </if>
+            <if test="workplanGuid!=null and workplanGuid!=''"> and WORKPLAN_GUID=#{workplanGuid} </if>
+            <if test="referTaskGuid!=null and referTaskGuid!=''"> and REFER_TASK_GUID=#{referTaskGuid} </if>
+            <if test="rowOrder!=null and rowOrder!=''"> and ROW_ORDER=#{rowOrder} </if>
+            <if test="extra1!=null and extra1!=''"> and EXTRA1=#{extra1} </if>
+            <if test="extra2!=null and extra2!=''"> and EXTRA2=#{extra2} </if>
+            <if test="extra3!=null and extra3!=''"> and EXTRA3=#{extra3} </if>
+            <if test="extra4!=null and extra4!=''"> and EXTRA4=#{extra4} </if>
+            <if test="extra5!=null and extra5!=''"> and EXTRA5=#{extra5} </if>
+            <if test="extra6!=null and extra6!=''"> and EXTRA6=#{extra6} </if>
+            <if test="extra7!=null and extra7!=''"> and EXTRA7=#{extra7} </if>
+            <if test="extra8!=null and extra8!=''"> and EXTRA8=#{extra8} </if>
+            <if test="extra9!=null and extra9!=''"> and EXTRA9=#{extra9} </if>
+            <if test="extra10!=null and extra10!=''"> and EXTRA10=#{extra10} </if>
+            <if test="orgGuid!=null and orgGuid!=''"> and ORG_GUID=#{orgGuid} </if>
+            <if test="orgCode!=null and orgCode!=''"> and ORG_CODE=#{orgCode} </if>
+            <if test="orgName!=null and orgName!=''"> and ORG_NAME=#{orgName} </if>
+            <if test="createDate!=null"> and CREATE_DATE=#{createDate} </if>
+            <if test="updateDate!=null"> and UPDATE_DATE=#{updateDate} </if>
+            <if test="deleteDate!=null"> and DELETE_DATE=#{deleteDate} </if>
+            <if test="createUserLabel!=null and createUserLabel!=''"> and CREATE_USER_LABEL=#{createUserLabel} </if>
+            <if test="updateUserLabel!=null and updateUserLabel!=''"> and UPDATE_USER_LABEL=#{updateUserLabel} </if>
+            <if test="deleteUserLabel!=null and deleteUserLabel!=''"> and DELETE_USER_LABEL=#{deleteUserLabel} </if>
+            <if test="createUserName!=null and createUserName!=''"> and CREATE_USER_NAME=#{createUserName} </if>
+            <if test="updateUserName!=null and updateUserName!=''"> and UPDATE_USER_NAME=#{updateUserName} </if>
+            <if test="deleteUserName!=null and deleteUserName!=''"> and DELETE_USER_NAME=#{deleteUserName} </if>
+            <if test="recordVersion!=null"> and RECORD_VERSION=#{recordVersion} </if>
+        </where>
+    </delete>
+
+    <delete id="deleteByKey">
+        delete from ${projectSchema}T_ABTR_AUTH
+        where
+        AUTH_GUID=#{authGuid}
+    </delete>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert  into ${projectSchema}T_ABTR_AUTH (				AUTH_GUID
+        ,WORKPLAN_GUID
+        ,REFER_TASK_GUID
+        ,ROW_ORDER
+        ,EXTRA1
+        ,EXTRA2
+        ,EXTRA3
+        ,EXTRA4
+        ,EXTRA5
+        ,EXTRA6
+        ,EXTRA7
+        ,EXTRA8
+        ,EXTRA9
+        ,EXTRA10
+        ,ORG_GUID
+        ,ORG_CODE
+        ,ORG_NAME
+        ,CREATE_DATE
+        ,UPDATE_DATE
+        ,DELETE_DATE
+        ,CREATE_USER_LABEL
+        ,UPDATE_USER_LABEL
+        ,DELETE_USER_LABEL
+        ,CREATE_USER_NAME
+        ,UPDATE_USER_NAME
+        ,DELETE_USER_NAME
+        ,RECORD_VERSION
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (		#{item.authGuid}
+            ,#{item.workplanGuid}
+            ,#{item.referTaskGuid}
+            ,#{item.rowOrder}
+            ,#{item.extra1}
+            ,#{item.extra2}
+            ,#{item.extra3}
+            ,#{item.extra4}
+            ,#{item.extra5}
+            ,#{item.extra6}
+            ,#{item.extra7}
+            ,#{item.extra8}
+            ,#{item.extra9}
+            ,#{item.extra10}
+            ,#{item.orgGuid}
+            ,#{item.orgCode}
+            ,#{item.orgName}
+            ,#{item.createDate}
+            ,#{item.updateDate}
+            ,#{item.deleteDate}
+            ,#{item.createUserLabel}
+            ,#{item.updateUserLabel}
+            ,#{item.deleteUserLabel}
+            ,#{item.createUserName}
+            ,#{item.updateUserName}
+            ,#{item.deleteUserName}
+            ,#{item.recordVersion}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

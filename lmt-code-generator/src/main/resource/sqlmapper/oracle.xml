@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="oracle">
+    <!-- 查询所有表 -->
+    <sql id="selectTable">
+        select t.table_name as table_name,tc.comments as comments
+        from user_tables t, user_tab_comments tc
+        where t.table_name = tc.table_name
+    </sql>
+    <!-- 查询所有表字段 -->
+    <sql id="selectColumn">
+        select t.table_name as table_name,
+               t.column_name as column_name,
+               t.data_type as data_type,
+               t.data_length as data_length,
+               t.column_id as column_id,
+               t.data_precision as data_precision,
+               t.data_scale as data_scale,
+               c.comments as comments
+        from user_tab_cols t, user_col_comments c
+        where t.table_name = c.table_name
+          and t.column_name = c.column_name
+          and t.table_name in (select table_name from user_tables)
+        order by t.table_name, t.column_id
+    </sql>
+    <!-- 查询表主键字段 -->
+    <sql id="selectPrimaryKey">
+        select t.table_name,t.column_name,c.constraint_type
+        from user_cons_columns t, user_constraints c
+        where t.table_name = c.table_name
+          and t.constraint_name = c.constraint_name
+          and c.CONSTRAINT_TYPE = 'P'
+          and t.table_name in (select table_name from user_tables)
+        group by t.table_name,t.column_name,c.constraint_type
+        order by t.table_name
+    </sql>
+</mapper>
