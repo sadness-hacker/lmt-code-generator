@@ -1,0 +1,70 @@
+/**
+ * Generate by lmt-code-generator ${date}
+ * you can find lmt-code-generator project on github, please visit:
+ *
+ */
+package ${tableBean.entityPackage};
+
+##继承父类或实现Serializable接口
+#if(${basicEntityClass} != '')
+import ${basicEntityClassFullName};
+#else
+import java.io.Serializable;
+#end
+
+#foreach(${importClass} in ${tableBean.importClassSet})
+import ${importClass};
+#end
+
+##启用lombok时导入
+#if(${lombokEnable})
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+#end
+
+/**
+ * @description ${tableBean.tableComment}
+ * @author Generate by lmt-code-generator
+ * @date ${date}
+ * @since JDK 1.8
+ */
+#if(${lombokEnable})
+@Setter
+@Getter
+@ToString(callSuper = true)
+#end
+public class ${tableBean.entityClassName} #if(${basicEntityClass} != '')extends ${basicEntityClass}#else implements Serializable #end {
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 1L;
+
+##生成字段
+#foreach(${cb} in ${tableBean.columnBeanList})
+    /** ${tableBean.tableName},${cb.columnName},$!{cb.columnComment}*/
+    private ${cb.javaType} ${cb.javaName};
+
+#end
+
+##lombok没启用时生成get/set方法
+#if(!${lombokEnable})
+    #foreach(${cb} in ${tableBean.columnBeanList})
+        /** ${tableBean.tableName},${cb.columnName},$!{cb.columnComment}*/
+        #if(${cb.javaType} == 'boolean' || ${cb.javaType} == 'Boolean')
+            public Boolean is${cb.javaNameFirstUpper}() {
+                returh this.${cb.javaName};
+            }
+        #else
+            public ${cb.javaType} get${cb.javaNameFirstUpper()} {
+                returh this.${cb.javaName};
+            }
+        #end
+
+        /** table=${cb.tableName},column=${cb.columnName},$!{cb.columnComment}*/
+        public void set${cb.javaNameFirstUpper}(${cb.javaType} ${cb.javaName}) {
+            this.${cb.javaName} = ${cb.javaName};
+        }
+    #end
+#end
+}

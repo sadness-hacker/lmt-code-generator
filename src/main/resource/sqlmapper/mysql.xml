@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="oracle">
+    <!-- 查询所有表 -->
+    <sql id="selectTable">
+        select table_name as table_name,
+               table_comment as table_comment
+        from information_schema.tables
+        where table_schema = '${schema}';
+    </sql>
+    <!-- 查询所有表字段 -->
+    <sql id="selectColumn">
+        select table_name as table_name,
+               column_name as column_name,
+               data_type as data_type,
+               character_maximum_length as data_length,
+               column_comment as column_comment
+        from information_schema.columns
+        where table_schema = '${schema}'
+        order by table_name,ordinal_position
+    </sql>
+    <!-- 查询表主键字段 -->
+    <sql id="selectPrimaryKey">
+        select table_name,
+               column_name
+        from information_schema.columns
+        where table_schema = '${schema}'
+        and column_key = 'PRI'
+        order by table_name,ordinal_position;
+    </sql>
+</mapper>
