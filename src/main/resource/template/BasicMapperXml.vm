@@ -62,26 +62,12 @@
         </if>
     </select>
 
-##主键字段列表
-#set($i = 0)
-#set($param = '')
-#set($pk = '')
-#foreach(${cb} in ${tableBean.pkColumnBeanList})
-#if($i == 0)
-    #set($param = $param + "t.${cb.columnName} = #{${cb.javaName}, jdbcType=${cb.jdbcType}}")
-    #set($i = $i + 1)
-    #set($pk = $cb)
-#else
-    #set($param = $param + "\n and t.${cb.columnName} = #{${cb.javaName}, jdbcType=${cb.jdbcType}}")
-#end
-#end
-
     <select id="get" resultMap="basic${tableBean.entityClassName}">
         select
         <include refid="basicResult" />
         from ${tableBean.tableName} t
         where
-        ${param}
+        t.${tableBean.pkColumnBean.columnName} = #{${tableBean.pkColumnBean.javaName}, jdbcType=${tableBean.pkColumnBean.jdbcType}}
     </select>
 
     <select id="count" resultType="long" parameterType="$tableBean.entityClassFullName">
@@ -100,15 +86,7 @@
 #end
         </set>
         where
-#set($i = 0)
-#foreach($pkColumn in $tableBean.pkColumnBeanList)
-#if($i == 0)
-            t.${pkColumn.columnName} = #{${tableBean.entityClassNameFirstLower}.${pkColumn.javaName}, jdbcType=${pkColumn.jdbcType}}
-#else
-        and t.${pkColumn.columnName} = #{${tableBean.entityClassNameFirstLower}.${pkColumn.javaName}, jdbcType=${pkColumn.jdbcType}}
-#end
-#set($i = $i + 1)
-#end
+            t.${tableBean.pkColumnBean.columnName} = #{${tableBean.entityClassNameFirstLower}.${tableBean.pkColumnBean.javaName}, jdbcType=${tableBean.pkColumnBean.jdbcType}}
     </update>
 
     <insert id="insert" parameterType="${tableBean.entityClassFullName}">
@@ -145,9 +123,18 @@
     </delete>
 
     <delete id="deleteByPk">
-        delete from $tableBean.tableName t
+        delete from ${tableBean.tableName} t
         where
-            ${param}
+            t.${tableBean.pkColumnBean.columnName} = #{${tableBean.pkColumnBean.javaName}, jdbcType=${tableBean.pkColumnBean.jdbcType}}
+    </delete>
+
+    <delete id="deleteByPKList">
+        delete from ${tableBean.tableName} t
+        where
+        t.${tableBean.pkColumnBean.columnName} in
+        <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item, jdbcType=${tableBean.pkColumnBean.jdbcType}}
+        </foreach>
     </delete>
 
     <insert id="batchInsert" parameterType="java.util.List">
@@ -196,15 +183,15 @@
 
     </insert>
 
-#if($i == 1)
-    <select id="listByIdList" resultMap="basic${tableBean.entityClassName}" parameterType="java.util.List">
+    <select id="listByPKList" resultMap="basic${tableBean.entityClassName}" parameterType="java.util.List">
         select
         <include refid="basicResult" />
         from ${tableBean.tableName} t
-        where t.${pk.columnName} in
+        where t.${tableBean.pkColumnBean.columnName}
+        in
         <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
-            #{item, jdbcType=${pk.jdbcType}}
+            #{item, jdbcType=${tableBean.pkColumnBean.jdbcType}}
         </foreach>
     </select>
-#end
+
 </mapper>

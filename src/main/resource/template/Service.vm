@@ -1,22 +1,20 @@
 /**
- * Generate by lmt-code-generator @date $date
+ * Generate by lmt-code-generator ${date}
  * you can find lmt-code-generator project on github, please visit:
  *
  */
-package ${tableBean.servicePackage};
+package ${tableBean.serviceApiPackage};
 
-import ${tableBean.basicServiceClassFullName};
-import ${tableBean.serviceApiClassFullName};
-import org.springframework.stereotype.Service;
+import ${tableBean.entityClassFullName};
+import com.lmt.parent.basic.service.BasicService;
 
 /**
- * @description ${tableBean.serviceClassName}服务实现
+ * @description ${tableBean.serviceApiClassName}服务接口定义
  *
  * @author Generate by lmt-code-generator
  * @date $date
  * @since JDK1.8
  */
-@Service
-public class ${tableBean.serviceClassName} extends ${tableBean.basicServiceClassName} implements ${tableBean.serviceApiClassName} {
+public interface ${tableBean.serviceApiClassName} extends BasicService<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> {
 
 }

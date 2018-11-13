@@ -1,0 +1,58 @@
+/**
+ * Generate by lmt-code-generator ${date}
+ * you can find lmt-code-generator project on github, please visit:
+ *
+ */
+package ${tableBean.basicServicePackage};
+
+#if(${tableBean.pkColumnBean.importClass})
+import ${tableBean.pkColumnBean.importClass};
+#end
+import ${tableBean.basicMapperClassFullName};
+import ${tableBean.entityClassFullName};
+import com.lmt.parent.basic.mapper.BasicMapper;
+import com.lmt.parent.basic.service.BasicService;
+import com.lmt.parent.basic.service.BasicServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * @description ${tableBean.entityClassName}基础Service实现
+ * @author Generate by lmt-code-generator
+ * @date $date
+ * @since JDK 1.8
+ */
+@Slf4j
+public class ${tableBean.basicServiceClassName} extends BasicServiceImpl<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> implements BasicService<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> {
+
+    @Autowired
+    private ${tableBean.basicMapperClassFullName} ${tableBean.basicMapperClassNameFirstLower};
+
+
+    /**
+     * @description 获取该service注入的对应的mapper
+     * @return
+     */
+    @Override
+    public BasicMapper<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> getBasicMapper() {
+        return ${tableBean.basicMapperClassNameFirstLower};
+    }
+
+    /**
+     * 更新或保存
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    @Override
+    public int saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        if(${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}() == null || get(${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}()) == null) {
+            log.debug("[${tableBean.entityClassName}] saveOrUpdate insert ${tableBean.entityClassNameFirstLower}={}", ${tableBean.entityClassNameFirstLower});
+            return insert(${tableBean.entityClassNameFirstLower});
+        } else {
+            log.debug("[${tableBean.entityClassName}] saveOrUpdate update ${tableBean.entityClassNameFirstLower}={}", ${tableBean.entityClassNameFirstLower});
+            return update(${tableBean.entityClassNameFirstLower});
+        }
+    }
+
+}

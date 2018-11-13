@@ -1,0 +1,33 @@
+/**
+ * Generate by lmt-code-generator ${date}
+ * you can find lmt-code-generator project on github, please visit:
+ *
+ */
+package ${tableBean.controllerPackage};
+
+import com.lmt.parent.basic.controller.BasicController;
+import com.lmt.parent.basic.service.BasicService;
+import ${tableBean.entityClassFullName};
+import ${tableBean.serviceApiClassFullName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * @description ${tableBean.entityClassName}Controller
+ * @author Generate by lmt-code-generator
+ * @date ${date}
+ * @since JDK 1.8
+ */
+@Controller
+@RequestMapping(value = "${requestMappingPrefix}/${tableBean.entityClassNameLower}")
+public class ${tableBean.entityClassName}Controller extends BasicController<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> {
+
+    @Autowired
+    private ${tableBean.serviceApiClassName} ${tableBean.serviceApiClassNameFirstLower};
+
+    @Override
+    public BasicService<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> getBasicService() {
+        return ${tableBean.serviceApiClassNameFirstLower};
+    }
+}
