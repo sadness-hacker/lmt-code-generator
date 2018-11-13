@@ -46,6 +46,10 @@ public class TableBean implements Serializable {
      */
     private String entityClassNameFirstLower;
     /**
+     * 类名全小写
+     */
+    private String entityClassNameLower;
+    /**
      * 基础类简称、全称、首字母小写
      */
     private String basicMapperPackage;
@@ -62,13 +66,6 @@ public class TableBean implements Serializable {
     private String mapperClassNameFirstLower;
 
     /**
-     * basicService接口名
-     */
-    private String basicServiceApiPackage;
-    private String basicServiceApiClassName;
-    private String basicServiceApiClassFullName;
-
-    /**
      * basicService名简称、全称
      */
     private String basicServicePackage;
@@ -82,6 +79,7 @@ public class TableBean implements Serializable {
     private String serviceApiPackage;
     private String serviceApiClassName;
     private String serviceApiClassFullName;
+    private String serviceApiClassNameFirstLower;
 
     /**
      * service名简称、全称
@@ -102,6 +100,11 @@ public class TableBean implements Serializable {
      * id字段bean
      */
     private List<ColumnBean> pkColumnBeanList;
+
+    /**
+     * 主键列
+     */
+    private ColumnBean pkColumnBean;
 
     /**
      * id字段需要导入的类

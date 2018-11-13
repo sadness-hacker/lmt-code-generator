@@ -63,13 +63,6 @@ public class GeneratorContext {
      */
     private String basePackage;
 
-//    code.generator.entity.package=com.baosight.bams.sj.aa.entity
-//    code.generator.basic.mapper.package=com.baosight.bams.sj.aa.basic.mapper
-//    code.generator.mapper.package=com.baosight.bams.sj.aa.mapper
-//    code.generator.mapper.xml.package=sqlmapper
-//    code.generator.basic.service.package=com.baosight.bams.sj.aa.basic.service
-//    code.generator.service.package=com.baosight.bams.sj.aa.mapper
-//    code.generator.controller.package=com.baosight.bams.sj.aa.controller
     /**
      * 实体包名
      */
@@ -98,23 +91,10 @@ public class GeneratorContext {
      * controller包名
      */
     private String controllerPackage;
-
     /**
-     * 需要继承的基础实体类
+     * controller前缀
      */
-    private String basicEntityClass;
-    /**
-     * 忽略的字段
-     */
-    private String engityIgnoreColumns;
-    /**
-     * 是否启用mybatis-page-helper
-     */
-    private boolean mybatisPagehelperEnable;
-    /**
-     * 是否启用lombok
-     */
-    private boolean lombokEnable;
+    private String controllerRequestMappingPrefix;
 
     /**
      * 根据配置文件路径创建代码生成器执行环境
@@ -148,10 +128,6 @@ public class GeneratorContext {
         context.setIgnoreSchema(getBoolean(configMap, "code.generator.ingore-schename"));
         context.setWorkspace(getString(configMap, "code.generator.workspace"));
         context.setBasePackage(getString(configMap, "code.generator.base-package"));
-        context.setBasicEntityClass(getString(configMap, "code.generator.basic-entity-class"));
-        context.setEngityIgnoreColumns(getString(configMap, "code.generator.entity.ignore-columns"));
-        context.setMybatisPagehelperEnable(getBoolean(configMap, "code.generator.mybatis-pagehelper.enable"));
-        context.setLombokEnable(getBoolean(configMap, "code.generator.lombok.enable"));
         context.setSchema(getString(configMap, "spring.datasource.schema"));
         context.setEntityPakcage(getString(configMap, "code.generator.entity.package"));
         context.setBasicMapperPackage(getString(configMap, "code.generator.basic.mapper.package"));
@@ -160,6 +136,7 @@ public class GeneratorContext {
         context.setBasicServicePackage(getString(configMap, "code.generator.basic.service.package"));
         context.setServicePackage(getString(configMap, "code.generator.service.package"));
         context.setControllerPackage(getString(configMap, "code.generator.controller.package"));
+        context.setControllerRequestMappingPrefix(getString(configMap, "code.generator.controller.request-mapping-prefix"));
         return context;
     }
 

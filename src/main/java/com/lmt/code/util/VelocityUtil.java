@@ -45,18 +45,8 @@ public class VelocityUtil {
         VelocityContext context = new VelocityContext();
         context.put("tableBean", tb);
         context.put("ignoreSchema", generatorContext.isIgnoreSchema());
-        context.put("lombokEnable", generatorContext.isLombokEnable());
-        context.put("myybatisPagehelperEnable", generatorContext.isMybatisPagehelperEnable());
         context.put("dbType", generatorContext.getDbType());
-        String basicEntityClass = generatorContext.getBasicEntityClass();
-        if(StringUtils.isNotBlank(basicEntityClass)) {
-            context.put("basicEntityClassFullName", basicEntityClass);
-            int i = basicEntityClass.lastIndexOf(".") + 1;
-            basicEntityClass = basicEntityClass.substring(i);
-            context.put("basicEntityClass", basicEntityClass);
-        } else {
-            context.put("basicEntityClass", "");
-        }
+        context.put("requestMappingPrefix", generatorContext.getControllerRequestMappingPrefix());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         context.put("date", sdf.format(new Date()));
         context.put("context", generatorContext);

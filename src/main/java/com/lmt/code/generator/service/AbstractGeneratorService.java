@@ -336,14 +336,9 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
     }
 
     private void generateBasicService(TableBean tb) {
-        String project = "code-basic-service-api";
-        String classFullName = tb.getBasicServiceApiClassFullName().replace(".", "/") + ".java";
-        String vm = "template/IBasicService.vm";
-        VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
-
-        project = "code-basic-service";
-        classFullName = tb.getBasicServiceClassFullName().replace(".", "/") + ".java";
-        vm = "template/BasicService.vm";
+        String project = "code-basic-service-impl";
+        String classFullName = tb.getBasicServiceClassFullName().replace(".", "/") + ".java";
+        String vm = "template/BasicServiceImpl.vm";
         VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
 
     }
@@ -351,12 +346,12 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
     private void genreateService(TableBean tb) {
         String project = "code-service-api";
         String classFullName = tb.getServiceApiClassFullName().replace(".", "/") + ".java";
-        String vm = "template/IService.vm";
+        String vm = "template/Service.vm";
         VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
 
-        project = "code-service";
+        project = "code-service-impl";
         classFullName = tb.getServiceClassFullName().replace(".", "/") + ".java";
-        vm = "template/Service.vm";
+        vm = "template/ServiceImpl.vm";
         VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
 
     }
@@ -408,6 +403,7 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         tb.setEntityClassName(entityClassName);
         tb.setEntityClassNameFirstLower(StringUtil.lowerFirstChar(entityClassName));
         tb.setEntityClassFullName(tb.getEntityPackage() + "." + entityClassName);
+        tb.setEntityClassNameLower(entityClassName.toLowerCase());
 
         //BasicMapper类名
         tb.setBasicMapperPackage(generatorContext.getBasicMapperPackage());
@@ -421,25 +417,21 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         tb.setMapperClassNameFirstLower(StringUtil.lowerFirstChar(tb.getMapperClassName()));
         tb.setMapperClassFullName(tb.getMapperPackage() + "." + tb.getMapperClassName());
 
-        //IBasiceService类名
-        tb.setBasicServiceApiPackage(generatorContext.getBasicServicePackage());
-        tb.setBasicServiceApiClassName("IBasic" + entityClassName + "Service");
-        tb.setBasicServiceApiClassFullName(tb.getBasicServiceApiPackage() + "." + tb.getBasicServiceApiClassName());
-
         //BasicService类名
         tb.setBasicServicePackage(generatorContext.getBasicServicePackage() + ".impl");
-        tb.setBasicServiceClassName("Basic" + entityClassName + "Service");
+        tb.setBasicServiceClassName("Basic" + entityClassName + "ServiceImpl");
         tb.setBasicServiceClassNameFirstLower(StringUtil.lowerFirstChar(tb.getBasicServiceClassName()));
         tb.setBasicServiceClassFullName(tb.getBasicServicePackage() + "." + tb.getBasicServiceClassName());
 
         //IService类名
         tb.setServiceApiPackage(generatorContext.getServicePackage());
-        tb.setServiceApiClassName("I" + entityClassName + "Service");
+        tb.setServiceApiClassName("" + entityClassName + "Service");
         tb.setServiceApiClassFullName(tb.getServiceApiPackage() + "." + tb.getServiceApiClassName());
+        tb.setServiceApiClassNameFirstLower(StringUtil.lowerFirstChar(tb.getServiceApiClassName()));
 
         //Service类名
         tb.setServicePackage(generatorContext.getServicePackage() + ".impl");
-        tb.setServiceClassName(entityClassName + "Service");
+        tb.setServiceClassName(entityClassName + "ServiceImpl");
         tb.setServiceClassNameFirstLower(StringUtil.lowerFirstChar(tb.getServiceClassName()));
         tb.setServiceClassFullName(tb.getServicePackage() + "." + tb.getServiceClassName());
 
@@ -473,6 +465,10 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
             }
         });
         tb.setPkColumnImportClassSet(pkImportClassSet);
+        if(pkList.size() != 1) {
+            throw new BasicException("9988", "不支持多主键,请使用代理主键tableName=" + tb.getTableName());
+        }
+        tb.setPkColumnBean(pkList.get(0));
     }
 
 }
