@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${tableBean.mapperClassFullName}">
-    <resultMap id="${tableBean.entityClassNameFirstLower}" type="${tableBean.entityClassFullName}" extends="${tableBean.basicMapperClassFullName}.basic${tableBean.entityClassName}">
+    <resultMap id="${tableBean.entityClassNameFirstLower}" type="${tableBean.entityClassFullName}">
+        <!--
+          Generate by lmt-code-generator
+          https://github.com/sadness-hacker/lmt-code-generator
+        -->
+#foreach(${cb} in ${tableBean.columnBeanList})
+    #if(${cb.columnName} == ${tableBean.pkColumnBean.columnName})
+        <id column="${cb.columnName}" property="${cb.javaName}" jdbcType="${cb.jdbcType}" javaType="${cb.javaType}"/>
+    #else
+    <result column="${cb.columnName}" property="${cb.javaName}" jdbcType="${cb.jdbcType}" javaType="${cb.javaType}"/>
+    #end
+#end
     </resultMap>
-
 </mapper>
+

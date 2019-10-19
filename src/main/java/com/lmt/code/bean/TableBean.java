@@ -30,6 +30,16 @@ public class TableBean implements Serializable {
     private String tableComment;
 
     /**
+     * 基础实体类名
+     */
+    private String basicEntityClassName;
+
+    /**
+     * 基础实体类名简称
+     */
+    private String basicEntityClassShortName;
+
+    /**
      * 实体包名
      */
     private String entityPackage;
@@ -49,13 +59,16 @@ public class TableBean implements Serializable {
      * 类名全小写
      */
     private String entityClassNameLower;
+
     /**
-     * 基础类简称、全称、首字母小写
+     * 基础mapper类名
      */
-    private String basicMapperPackage;
     private String basicMapperClassName;
-    private String basicMapperClassFullName;
-    private String basicMapperClassNameFirstLower;
+
+    /**
+     * 基础mapper类名简称
+     */
+    private String basicMapperClassShortName;
 
     /**
      * mapper名简称、全称、首字母小写
@@ -64,14 +77,6 @@ public class TableBean implements Serializable {
     private String mapperClassName;
     private String mapperClassFullName;
     private String mapperClassNameFirstLower;
-
-    /**
-     * basicService名简称、全称
-     */
-    private String basicServicePackage;
-    private String basicServiceClassName;
-    private String basicServiceClassFullName;
-    private String basicServiceClassNameFirstLower;
 
     /**
      * service接口名

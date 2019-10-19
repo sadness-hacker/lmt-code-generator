@@ -11,12 +11,12 @@ import com.lmt.code.type.MySQLTypeEnum;
 import java.sql.ResultSet;
 
 /**
- * 
+ *
  * @description
  * @author bazhandao
  * @date 2018年10月22日 上午11:43:23
  * @since JDK 1.8
- * 
+ *
  */
 public class MySQLGeneratorService extends AbstractGeneratorService {
 
@@ -85,7 +85,7 @@ public class MySQLGeneratorService extends AbstractGeneratorService {
         if(dataType.indexOf("(") > 0) {
             dataType = dataType.substring(0, dataType.indexOf("("));
         }
-        int dataLength = rs.getInt("data_length");
+        long dataLength = rs.getLong("data_length");
         String comments = rs.getString("column_comment");
         cb.setTableName(tableName);
         cb.setColumnComment(comments);

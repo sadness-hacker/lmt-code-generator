@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.jboss.test</groupId>
@@ -12,7 +13,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ojdbc14>10.2.0.4.0</ojdbc14>
 		<mysql-connector-java>8.0.13</mysql-connector-java>
 		<velocity>1.7</velocity>
         <mybatis-spring-boot-starter>1.3.2</mybatis-spring-boot-starter>
@@ -21,19 +21,15 @@
         <pagehelper>5.1.7</pagehelper>
         <junit>4.12</junit>
         <commons-io>2.6</commons-io>
+        <h2>1.4.199</h2>
 	</properties>
 	<dependencies>
-		<!--<dependency>-->
-			<!--<groupId>com.oracle</groupId>-->
-			<!--<artifactId>ojdbc14</artifactId>-->
-			<!--<version>${ojdbc14}</version>-->
-		<!--</dependency>-->
         <dependency>
             <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>ojdbc8</version>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4.0</version>
             <scope>system</scope>
-            <systemPath>/Users/ducx/Downloads/ojdbc8.jar</systemPath>
+            <systemPath>${project.basedir}/lib/ojdbc14-10.2.0.4.0.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -78,7 +74,12 @@
             <version>${junit}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

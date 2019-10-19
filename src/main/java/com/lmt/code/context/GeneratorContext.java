@@ -64,13 +64,30 @@ public class GeneratorContext {
     private String basePackage;
 
     /**
+     * 基础实体类名
+     */
+    private String basicEntityClass;
+
+    /**
+     * 基础实体类名
+     */
+    private String basicEntityClassShortName;
+
+    /**
      * 实体包名
      */
     private String entityPakcage;
+
     /**
-     * 基础mapper包名
+     * 基础mapper类名
      */
-    private String basicMapperPackage;
+    private String basicMapperClassName;
+
+    /**
+     * 基础mapper类名简称
+     */
+    private String basicMapperClassShortName;
+
     /**
      * 扩展mapper包名
      */
@@ -80,13 +97,13 @@ public class GeneratorContext {
      */
     private String mapperXmlPackage;
     /**
-     * 基础service包名
-     */
-    private String basicServicePackage;
-    /**
-     * 扩展service包名
+     * service接口包名
      */
     private String servicePackage;
+    /**
+     * service实现类包名
+     */
+    private String serviceImplPackage;
     /**
      * controller包名
      */
@@ -129,12 +146,19 @@ public class GeneratorContext {
         context.setWorkspace(getString(configMap, "code.generator.workspace"));
         context.setBasePackage(getString(configMap, "code.generator.base-package"));
         context.setSchema(getString(configMap, "spring.datasource.schema"));
+        context.setBasicEntityClass(getString(configMap, "code.generator.basic.entity.class"));
+        String s = context.getBasicEntityClass();
+        s = s.substring(s.lastIndexOf('.') + 1);
+        context.setBasicEntityClassShortName(s);
         context.setEntityPakcage(getString(configMap, "code.generator.entity.package"));
-        context.setBasicMapperPackage(getString(configMap, "code.generator.basic.mapper.package"));
+        context.setBasicMapperClassName(getString(configMap, "code.generator.basic.mapper.class"));
+        s = context.getBasicMapperClassName();
+        s = s.substring(s.lastIndexOf('.') + 1);
+        context.setBasicMapperClassShortName(s);
         context.setMapperPakcage(getString(configMap, "code.generator.mapper.package"));
         context.setMapperXmlPackage(getString(configMap, "code.generator.mapper.xml.package"));
-        context.setBasicServicePackage(getString(configMap, "code.generator.basic.service.package"));
         context.setServicePackage(getString(configMap, "code.generator.service.package"));
+        context.setServiceImplPackage(getString(configMap, "code.generator.service.impl.package"));
         context.setControllerPackage(getString(configMap, "code.generator.controller.package"));
         context.setControllerRequestMappingPrefix(getString(configMap, "code.generator.controller.request-mapping-prefix"));
         return context;

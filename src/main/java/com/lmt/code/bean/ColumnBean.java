@@ -24,7 +24,7 @@ public class ColumnBean implements Serializable {
     /**
      * 数据长度
      */
-    private int dataLength;
+    private long dataLength;
 
     /**
      * 字段名

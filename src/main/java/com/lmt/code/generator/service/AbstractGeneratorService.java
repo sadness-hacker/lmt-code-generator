@@ -22,12 +22,12 @@ import java.sql.Statement;
 import java.util.*;
 
 /**
- * 
+ *
  * @description
  * @author bazhandao
  * @date 2018年10月22日 上午11:49:05
  * @since JDK 1.8
- * 
+ *
  */
 @Slf4j
 @Getter
@@ -226,7 +226,9 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         for(ColumnBean cb : columnList) {
             String tableName = cb.getTableName();
             TableBean tb = tableBeanMap.get(tableName);
-            if(tb == null) continue;
+            if (tb == null) {
+                continue;
+            }
             List<ColumnBean> tmpList = tb.getColumnBeanList();
             if(tmpList == null) {
                 tmpList = new ArrayList<>();
@@ -295,9 +297,7 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         list.forEach(tb -> {
             buildClassName(tb);
             generateEntity(tb);
-            generateBasicMapper(tb);
             generateMapper(tb);
-            generateBasicService(tb);
             genreateService(tb);
             genreateService(tb);
             generateController(tb);
@@ -311,18 +311,6 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
     }
 
-    private void generateBasicMapper(TableBean tb) {
-        String project = "code-basic-mapper";
-        String classFullName = tb.getBasicMapperClassFullName().replace(".", "/") + ".java";
-        String vm = "template/BasicMapper.vm";
-        VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
-
-        vm = "template/BasicMapperXml.vm";
-        classFullName = generatorContext.getMapperXmlPackage().replace(".", "/") + "/basic/" + tb.getBasicMapperClassName() + ".xml";
-        VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
-
-    }
-
     private void generateMapper(TableBean tb) {
         String project = "code-mapper";
         String classFullName = tb.getMapperClassFullName().replace(".", "/") + ".java";
@@ -331,14 +319,6 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
 
         vm = "template/MapperXml.vm";
         classFullName = generatorContext.getMapperXmlPackage().replace(".", "/") + "/" + tb.getMapperClassName() + ".xml";
-        VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
-
-    }
-
-    private void generateBasicService(TableBean tb) {
-        String project = "code-basic-service-impl";
-        String classFullName = tb.getBasicServiceClassFullName().replace(".", "/") + ".java";
-        String vm = "template/BasicServiceImpl.vm";
         VelocityUtil.generateCode(vm, project, classFullName, generatorContext, tb);
 
     }
@@ -397,6 +377,8 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         if(StringUtils.isNotBlank(tablePrefix) && tableName.toUpperCase().startsWith(tablePrefix.toUpperCase())) {
             tableName = tableName.toLowerCase().replaceFirst(tablePrefix.toLowerCase(), "");
         }
+        tb.setBasicEntityClassName(generatorContext.getBasicEntityClass());
+        tb.setBasicEntityClassShortName(generatorContext.getBasicEntityClassShortName());
         //实体类名
         String entityClassName = StringUtil.toClassName(tableName);
         tb.setEntityPackage(generatorContext.getEntityPakcage());
@@ -406,10 +388,12 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         tb.setEntityClassNameLower(entityClassName.toLowerCase());
 
         //BasicMapper类名
-        tb.setBasicMapperPackage(generatorContext.getBasicMapperPackage());
-        tb.setBasicMapperClassName("Basic" + entityClassName + "Mapper");
-        tb.setBasicMapperClassNameFirstLower(StringUtil.lowerFirstChar(tb.getBasicMapperClassName()));
-        tb.setBasicMapperClassFullName(tb.getBasicMapperPackage() + "." + tb.getBasicMapperClassName());
+        tb.setBasicMapperClassName(generatorContext.getBasicMapperClassName());
+        tb.setBasicMapperClassShortName(generatorContext.getBasicMapperClassShortName());
+//        tb.setBasicMapperPackage(generatorContext.getBasicMapperPackage());
+//        tb.setBasicMapperClassName("Basic" + entityClassName + "Mapper");
+//        tb.setBasicMapperClassNameFirstLower(StringUtil.lowerFirstChar(tb.getBasicMapperClassName()));
+//        tb.setBasicMapperClassFullName(tb.getBasicMapperPackage() + "." + tb.getBasicMapperClassName());
 
         //Mapper类名
         tb.setMapperPackage(generatorContext.getMapperPakcage());
@@ -418,18 +402,18 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
         tb.setMapperClassFullName(tb.getMapperPackage() + "." + tb.getMapperClassName());
 
         //BasicService类名
-        tb.setBasicServicePackage(generatorContext.getBasicServicePackage() + ".impl");
-        tb.setBasicServiceClassName("Basic" + entityClassName + "ServiceImpl");
-        tb.setBasicServiceClassNameFirstLower(StringUtil.lowerFirstChar(tb.getBasicServiceClassName()));
-        tb.setBasicServiceClassFullName(tb.getBasicServicePackage() + "." + tb.getBasicServiceClassName());
+//        tb.setBasicServicePackage(generatorContext.getBasicServicePackage() + ".impl");
+//        tb.setBasicServiceClassName("Basic" + entityClassName + "ServiceImpl");
+//        tb.setBasicServiceClassNameFirstLower(StringUtil.lowerFirstChar(tb.getBasicServiceClassName()));
+//        tb.setBasicServiceClassFullName(tb.getBasicServicePackage() + "." + tb.getBasicServiceClassName());
 
-        //IService类名
+        //Service接口类名
         tb.setServiceApiPackage(generatorContext.getServicePackage());
         tb.setServiceApiClassName("" + entityClassName + "Service");
         tb.setServiceApiClassFullName(tb.getServiceApiPackage() + "." + tb.getServiceApiClassName());
         tb.setServiceApiClassNameFirstLower(StringUtil.lowerFirstChar(tb.getServiceApiClassName()));
 
-        //Service类名
+        //Service实现类名
         tb.setServicePackage(generatorContext.getServicePackage() + ".impl");
         tb.setServiceClassName(entityClassName + "ServiceImpl");
         tb.setServiceClassNameFirstLower(StringUtil.lowerFirstChar(tb.getServiceClassName()));

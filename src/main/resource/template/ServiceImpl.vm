@@ -1,13 +1,22 @@
 /**
  * Generate by lmt-code-generator @date $date
- * you can find lmt-code-generator project on github, please visit:
+ * you can find lmt-code-generator project on github
+ * please visit: https://github.com/sadness-hacker/lmt-code-generator
  *
  */
 package ${tableBean.servicePackage};
 
-import ${tableBean.basicServiceClassFullName};
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import ${tableBean.entityClassFullName};
+import ${tableBean.mapperClassFullName};
 import ${tableBean.serviceApiClassFullName};
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @description ${tableBean.serviceClassName}服务实现
@@ -17,6 +26,143 @@ import org.springframework.stereotype.Service;
  * @since JDK1.8
  */
 @Service
-public class ${tableBean.serviceClassName} extends ${tableBean.basicServiceClassName} implements ${tableBean.serviceApiClassName} {
+public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClassName} {
 
+    @Autowired
+    private ${tableBean.mapperClassName} ${tableBean.mapperClassNameFirstLower};
+
+    /**
+     * 根据主键查寻
+     *
+     * @param ${tableBean.pkColumnBean.javaName}
+     * @return
+     */
+    @Override
+    public ${tableBean.entityClassName} get(${tableBean.pkColumnBean.javaType} ${tableBean.pkColumnBean.javaName}) {
+        return ${tableBean.mapperClassNameFirstLower}.selectByPrimaryKey(${tableBean.pkColumnBean.javaName});
+    }
+
+    /**
+     * 新增
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     */
+    @Override
+    public void insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        ${tableBean.mapperClassNameFirstLower}.insert(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 根据主键更新
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     */
+    @Override
+    public void update(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        ${tableBean.mapperClassNameFirstLower}.updateByPrimaryKeySelective(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 根据主键删除
+     *
+     * @param id
+     */
+    @Override
+    public void delete(${tableBean.pkColumnBean.javaType} id) {
+        ${tableBean.mapperClassNameFirstLower}.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 根据主键列表删除
+     *
+     * @param ids
+     */
+    @Override
+    public void deleteByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
+        ${tableBean.mapperClassNameFirstLower}.deleteByIds((StringUtils.join(ids, ",")));
+    }
+
+    /**
+     * 根据主键数组删除
+     *
+     * @param ids
+     */
+    @Override
+    public void deleteByIds(${tableBean.pkColumnBean.javaType}[] ids) {
+        ${tableBean.mapperClassNameFirstLower}.deleteByIds((StringUtils.join(ids, ",")));
+    }
+
+    /**
+     * 保存或更新
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     */
+    @Override
+    public void saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        if (${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}() == null || get(${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}()) == null) {
+            insert(${tableBean.entityClassNameFirstLower});
+        } else {
+            update(${tableBean.entityClassNameFirstLower});
+        }
+    }
+
+    /**
+     * 根据条件查寻列表
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    @Override
+    public List<${tableBean.entityClassName}> list(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.select(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 根据id查寻列表
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public List<${tableBean.entityClassName}> listByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
+        return ${tableBean.mapperClassNameFirstLower}.selectByIds(StringUtils.join(ids, ","));
+    }
+
+    /**
+     * 根据id数组查寻
+     * @param ids
+     * @return
+     */
+    @Override
+    public List<${tableBean.entityClassName}> listByIds(${tableBean.pkColumnBean.javaType} [] ids) {
+        return ${tableBean.mapperClassNameFirstLower}.selectByIds(StringUtils.join(ids, ","));
+    }
+
+    /**
+     * 根据条件统计
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    @Override
+    public int count(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.selectCount(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 分页查寻
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @param pageSize
+     * @param pageNum
+     * @param sortField
+     * @param sortOrder
+     * @return
+     */
+    @Override
+    public PageInfo<${tableBean.entityClassName}> queryByPage(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, int pageSize, int pageNum, String sortField, String sortOrder) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<${tableBean.entityClassName}> list = ${tableBean.mapperClassNameFirstLower}.queryOrderBy(${tableBean.entityClassNameFirstLower}, sortField, sortOrder);
+        return new PageInfo(list);
+    }
 }

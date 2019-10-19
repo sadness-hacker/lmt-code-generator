@@ -1,6 +1,7 @@
 /**
  * Generate by lmt-code-generator ${date}
- * you can find lmt-code-generator project on github, please visit:
+ * you can find lmt-code-generator project on github
+ * please visit: https://github.com/sadness-hacker/lmt-code-generator
  *
  */
 package ${tableBean.controllerPackage};

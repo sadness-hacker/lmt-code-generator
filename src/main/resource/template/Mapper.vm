@@ -1,22 +1,24 @@
 /**
  * Generate by lmt-code-generator $date
- * you can find lmt-code-generator project on github, please visit:
+ * you can find lmt-code-generator project on github
+ * please visit: https://github.com/sadness-hacker/lmt-code-generator
  *
  */
 package ${tableBean.mapperPackage};
 
-import ${tableBean.basicMapperClassFullName};
+import ${tableBean.entityClassFullName};
+import ${tableBean.basicMapperClassName};
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  *
- * @description ${tableBean.mapperClassName}接口,增加自定义sql相关接口时请在该类添加，不要在${tableBean.basicMapperClassName}中添加
+ * @description ${tableBean.mapperClassName}接口
  * @author Generate by lmt-code-generator
  * @date $date
  * @since JDK 1.8
  *
  */
 @Mapper
-public interface ${tableBean.mapperClassName} extends ${tableBean.basicMapperClassName} {
+public interface ${tableBean.mapperClassName} extends ${tableBean.basicMapperClassShortName}<${tableBean.entityClassName}> {
 
 }

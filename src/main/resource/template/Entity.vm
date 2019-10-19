@@ -1,11 +1,12 @@
 /**
  * Generate by lmt-code-generator ${date}
- * you can find lmt-code-generator project on github, please visit:
+ * you can find lmt-code-generator project on github
+ * please visit: https://github.com/sadness-hacker/lmt-code-generator
  *
  */
 package ${tableBean.entityPackage};
 
-import com.lmt.parent.basic.entity.Entity;
+import ${tableBean.basicEntityClassName};
 
 #foreach(${importClass} in ${tableBean.importClassSet})
 import ${importClass};
@@ -16,6 +17,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @description ${tableBean.tableComment}
  * @author Generate by lmt-code-generator
@@ -25,18 +31,35 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString(callSuper = true)
-public class ${tableBean.entityClassName} extends Entity {
+@Table(name = "${tableBean.tableName}")
+public class ${tableBean.entityClassName} extends ${tableBean.basicEntityClassShortName} {
 
     /**
      * serialVersionUID
      */
     private static final long serialVersionUID = 1L;
 
+
 ##生成字段
 #foreach(${cb} in ${tableBean.columnBeanList})
-    /** ${tableBean.tableName},${cb.columnName},$!{cb.columnComment}*/
+    #if(${cb.columnName} == ${tableBean.pkColumnBean.columnName})
+/**
+    * $!{cb.columnComment}
+    */
+    @Id
+    @Column(name = "${cb.columnName}")
+    @GeneratedValue(generator = "JDBC")
     private ${cb.javaType} ${cb.javaName};
 
+#else
+
+    /**
+     * $!{cb.columnComment}
+    */
+    @Column(name = "${cb.columnName}")
+    private ${cb.javaType} ${cb.javaName};
+
+    #end
 #end
 
 }

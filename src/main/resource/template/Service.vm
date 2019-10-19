@@ -1,12 +1,14 @@
 /**
  * Generate by lmt-code-generator ${date}
- * you can find lmt-code-generator project on github, please visit:
+ * you can find lmt-code-generator project on github
+ * please visit: https://github.com/sadness-hacker/lmt-code-generator
  *
  */
 package ${tableBean.serviceApiPackage};
 
+import com.github.pagehelper.PageInfo;
 import ${tableBean.entityClassFullName};
-import com.lmt.parent.basic.service.BasicService;
+import java.util.List;
 
 /**
  * @description ${tableBean.serviceApiClassName}服务接口定义
@@ -15,6 +17,89 @@ import com.lmt.parent.basic.service.BasicService;
  * @date $date
  * @since JDK1.8
  */
-public interface ${tableBean.serviceApiClassName} extends BasicService<${tableBean.entityClassName}, ${tableBean.pkColumnBean.javaType}> {
+public interface ${tableBean.serviceApiClassName} {
+
+    /**
+     * 根据主键查寻
+     * @param ${tableBean.pkColumnBean.javaName}
+     * @return
+    */
+    public ${tableBean.entityClassName} get(${tableBean.pkColumnBean.javaType} ${tableBean.pkColumnBean.javaName});
+
+    /**
+     * 新增
+     * @param ${tableBean.entityClassNameFirstLower}
+    */
+    public void insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据主键更新
+     * @param ${tableBean.entityClassNameFirstLower}
+    */
+    public void update(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据主键删除
+     * @param id
+     */
+    public void delete(${tableBean.pkColumnBean.javaType} id);
+
+    /**
+     * 根据主键列表删除
+     * @param ids
+     */
+    public void deleteByIds(List<${tableBean.pkColumnBean.javaType}> ids);
+
+    /**
+     * 根据主键数组删除
+     * @param ids
+     */
+    public void deleteByIds(${tableBean.pkColumnBean.javaType} [] ids);
+
+    /**
+     * 保存或更新
+     * @param ${tableBean.entityClassNameFirstLower}
+    */
+    public void saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据条件查寻列表
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    public List<${tableBean.entityClassName}> list(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据主键列表查寻列表
+     * @param ids
+     * @return
+     */
+    public List<${tableBean.entityClassName}> listByIds(List<${tableBean.pkColumnBean.javaType}> ids);
+
+
+    /**
+     * 根据主键数组查寻
+     * @param ids
+     * @return
+     */
+    public List<${tableBean.entityClassName}> listByIds(${tableBean.pkColumnBean.javaType} [] ids);
+
+    /**
+     * 根据条件统计
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    public int count(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 分页查寻
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @param pageSize
+     * @param pageNum
+     * @param sortField
+     * @param sortOrder
+     * @return
+    */
+    public PageInfo<${tableBean.entityClassName}> queryByPage(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, int pageSize, int pageNum, String sortField, String sortOrder);
 
 }
