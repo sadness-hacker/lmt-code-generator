@@ -33,6 +33,12 @@ public interface ${tableBean.serviceApiClassName} {
     public void insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
 
     /**
+     * 批量插入
+     * @param ${tableBean.entityClassNameFirstLower}List
+     */
+    public void insertList(List<${tableBean.entityClassName}> ${tableBean.entityClassNameFirstLower}List);
+
+    /**
      * 根据主键更新
      * @param ${tableBean.entityClassNameFirstLower}
     */

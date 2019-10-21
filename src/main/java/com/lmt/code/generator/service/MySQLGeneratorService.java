@@ -96,6 +96,11 @@ public class MySQLGeneratorService extends AbstractGeneratorService {
         if(type == null) {
             throw new BasicException("2300", "MySQL类型未知,jdbcType=" + dataType);
         }
+        if (type.getJdbcType().equalsIgnoreCase("datetime")) {
+            cb.setJdbcType("TIMESTAMP");
+        } else {
+            cb.setJdbcType(cb.getJdbcType().toUpperCase());
+        }
         cb.setJavaType(type.getJavaType());
         cb.setImportClass(type.getImportClass());
         return cb;

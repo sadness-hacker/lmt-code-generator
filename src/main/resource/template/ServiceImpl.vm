@@ -49,7 +49,17 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      */
     @Override
     public void insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
-        ${tableBean.mapperClassNameFirstLower}.insert(${tableBean.entityClassNameFirstLower});
+        ${tableBean.mapperClassNameFirstLower}.insertSelective(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param ${tableBean.entityClassNameFirstLower}List
+     */
+    @Override
+    public void insertList(List<${tableBean.entityClassName}> ${tableBean.entityClassNameFirstLower}List) {
+        ${tableBean.mapperClassNameFirstLower}.insertList(${tableBean.entityClassNameFirstLower}List);
     }
 
     /**

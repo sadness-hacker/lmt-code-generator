@@ -7,11 +7,11 @@
           https://github.com/sadness-hacker/lmt-code-generator
         -->
 #foreach(${cb} in ${tableBean.columnBeanList})
-    #if(${cb.columnName} == ${tableBean.pkColumnBean.columnName})
+#if(${cb.columnName} == ${tableBean.pkColumnBean.columnName})
         <id column="${cb.columnName}" property="${cb.javaName}" jdbcType="${cb.jdbcType}" javaType="${cb.javaType}"/>
-    #else
-    <result column="${cb.columnName}" property="${cb.javaName}" jdbcType="${cb.jdbcType}" javaType="${cb.javaType}"/>
-    #end
+#else
+        <result column="${cb.columnName}" property="${cb.javaName}" jdbcType="${cb.jdbcType}" javaType="${cb.javaType}"/>
+#end
 #end
     </resultMap>
 </mapper>
