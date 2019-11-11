@@ -6,7 +6,6 @@
  */
 package ${tableBean.serviceApiPackage};
 
-import com.github.pagehelper.PageInfo;
 import ${tableBean.entityClassFullName};
 import java.util.List;
 
@@ -69,13 +68,6 @@ public interface ${tableBean.serviceApiClassName} {
     public void saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
 
     /**
-     * 根据条件查寻列表
-     * @param ${tableBean.entityClassNameFirstLower}
-     * @return
-     */
-    public List<${tableBean.entityClassName}> list(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
-
-    /**
      * 根据主键列表查寻列表
      * @param ids
      * @return
@@ -97,15 +89,34 @@ public interface ${tableBean.serviceApiClassName} {
      */
     public int count(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
 
+
     /**
-     * 分页查寻
+     * 获取所有数据，返回列表
+     * @return
+     */
+    public List<SysUser> listAll();
+
+    /**
+     * 根据条件查寻列表
      * @param ${tableBean.entityClassNameFirstLower}
-     * @param pageSize
-     * @param pageNum
+     * @return
+     */
+    public List<${tableBean.entityClassName}> query(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据条件查寻唯一结果
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    public ${tableBean.entityClassName} queryOne(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower});
+
+    /**
+     * 根据指定字段排序查询列表
+     * @param ${tableBean.entityClassNameFirstLower}
      * @param sortField
      * @param sortOrder
      * @return
-    */
-    public PageInfo<${tableBean.entityClassName}> queryByPage(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, int pageSize, int pageNum, String sortField, String sortOrder);
+     */
+    public List<${tableBean.entityClassName}> queryOrderBy(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, String sortField, String sortOrder);
 
 }

@@ -8,7 +8,6 @@ package ${tableBean.mapperPackage};
 
 import ${tableBean.entityClassFullName};
 import ${tableBean.basicMapperClassName};
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  *
@@ -18,7 +17,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since JDK 1.8
  *
  */
-@Mapper
 public interface ${tableBean.mapperClassName} extends ${tableBean.basicMapperClassShortName}<${tableBean.entityClassName}> {
 
 }

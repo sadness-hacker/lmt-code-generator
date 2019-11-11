@@ -437,6 +437,11 @@ public abstract class AbstractGeneratorService implements IGeneratorService{
             cb.setJavaName(StringUtil.lowerFirstChar(javaName));
             if(StringUtils.isNotBlank(cb.getImportClass())) {
                 importClassSet.add(cb.getImportClass());
+                String javaType = cb.getJavaType();
+                if (javaType.indexOf('.') > -1) {
+                    javaType = javaType.substring(javaType.lastIndexOf('.') + 1);
+                    cb.setJavaType(javaType);
+                }
             }
         });
         tb.setImportClassSet(importClassSet);

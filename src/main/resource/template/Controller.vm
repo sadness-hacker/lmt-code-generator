@@ -6,8 +6,8 @@
  */
 package ${tableBean.controllerPackage};
 
-import com.lmt.parent.basic.controller.BasicController;
-import com.lmt.parent.basic.service.BasicService;
+import BasicController;
+import BasicService;
 import ${tableBean.entityClassFullName};
 import ${tableBean.serviceApiClassFullName};
 import org.springframework.beans.factory.annotation.Autowired;

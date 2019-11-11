@@ -6,9 +6,6 @@
  */
 package ${tableBean.servicePackage};
 
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import ${tableBean.entityClassFullName};
 import ${tableBean.mapperClassFullName};
 import ${tableBean.serviceApiClassFullName};
@@ -117,17 +114,6 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
     }
 
     /**
-     * 根据条件查寻列表
-     *
-     * @param ${tableBean.entityClassNameFirstLower}
-     * @return
-     */
-    @Override
-    public List<${tableBean.entityClassName}> list(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
-        return ${tableBean.mapperClassNameFirstLower}.select(${tableBean.entityClassNameFirstLower});
-    }
-
-    /**
      * 根据id查寻列表
      *
      * @param ids
@@ -160,19 +146,48 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
     }
 
     /**
-     * 分页查寻
+     * 获取所有数据，返回列表
+     *
+     * @return
+     */
+    @Override
+    public List<${tableBean.entityClassName}> listAll() {
+        return ${tableBean.mapperClassNameFirstLower}.selectAll();
+    }
+
+    /**
+     * 根据条件查寻列表
      *
      * @param ${tableBean.entityClassNameFirstLower}
-     * @param pageSize
-     * @param pageNum
+     * @return
+     */
+    @Override
+    public List<${tableBean.entityClassName}> query(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.select(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 根据条件查寻唯一结果
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
+     * @return
+     */
+    @Override
+    public ${tableBean.entityClassName} queryOne(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.selectOne(${tableBean.entityClassNameFirstLower});
+    }
+
+    /**
+     * 根据指定字段排序查询列表
+     *
+     * @param ${tableBean.entityClassNameFirstLower}
      * @param sortField
      * @param sortOrder
      * @return
      */
     @Override
-    public PageInfo<${tableBean.entityClassName}> queryByPage(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, int pageSize, int pageNum, String sortField, String sortOrder) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<${tableBean.entityClassName}> list = ${tableBean.mapperClassNameFirstLower}.queryOrderBy(${tableBean.entityClassNameFirstLower}, sortField, sortOrder);
-        return new PageInfo(list);
+    public List<${tableBean.entityClassName}> queryOrderBy(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, String sortField, String sortOrder) {
+        return ${tableBean.mapperClassNameFirstLower}.queryOrderBy(${tableBean.entityClassNameFirstLower}, sortField, sortOrder);
     }
+
 }
