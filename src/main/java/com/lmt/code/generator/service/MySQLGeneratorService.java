@@ -98,6 +98,8 @@ public class MySQLGeneratorService extends AbstractGeneratorService {
         }
         if (type.getJdbcType().equalsIgnoreCase("datetime")) {
             cb.setJdbcType("TIMESTAMP");
+        } else if (type.getJdbcType().equalsIgnoreCase("INT")) {
+            cb.setJdbcType("INTEGER");
         } else {
             cb.setJdbcType(cb.getJdbcType().toUpperCase());
         }
