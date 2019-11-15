@@ -9,11 +9,11 @@ package ${tableBean.servicePackage};
 import ${tableBean.entityClassFullName};
 import ${tableBean.mapperClassFullName};
 import ${tableBean.serviceApiClassFullName};
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * @description ${tableBean.serviceClassName}服务实现
@@ -86,7 +86,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      */
     @Override
     public void deleteByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
-        ${tableBean.mapperClassNameFirstLower}.deleteByIds((StringUtils.join(ids, ",")));
+        ${tableBean.mapperClassNameFirstLower}.deleteByIds(ids);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      */
     @Override
     public void deleteByIds(${tableBean.pkColumnBean.javaType}[] ids) {
-        ${tableBean.mapperClassNameFirstLower}.deleteByIds((StringUtils.join(ids, ",")));
+        ${tableBean.mapperClassNameFirstLower}.deleteByIds(Arrays.asList(ids));
     }
 
     /**
@@ -121,7 +121,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      */
     @Override
     public List<${tableBean.entityClassName}> listByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
-        return ${tableBean.mapperClassNameFirstLower}.selectByIds(StringUtils.join(ids, ","));
+        return ${tableBean.mapperClassNameFirstLower}.selectByIds(ids);
     }
 
     /**
@@ -131,7 +131,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      */
     @Override
     public List<${tableBean.entityClassName}> listByIds(${tableBean.pkColumnBean.javaType} [] ids) {
-        return ${tableBean.mapperClassNameFirstLower}.selectByIds(StringUtils.join(ids, ","));
+        return ${tableBean.mapperClassNameFirstLower}.selectByIds(Arrays.asList(ids));
     }
 
     /**
