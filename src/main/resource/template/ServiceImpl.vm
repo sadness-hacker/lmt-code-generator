@@ -35,7 +35,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public ${tableBean.entityClassName} get(${tableBean.pkColumnBean.javaType} ${tableBean.pkColumnBean.javaName}) {
+    ${tableBean.entityClassName} get(${tableBean.pkColumnBean.javaType} ${tableBean.pkColumnBean.javaName}) {
         return ${tableBean.mapperClassNameFirstLower}.selectByPrimaryKey(${tableBean.pkColumnBean.javaName});
     }
 
@@ -45,8 +45,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ${tableBean.entityClassNameFirstLower}
      */
     @Override
-    public void insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
-        ${tableBean.mapperClassNameFirstLower}.insertSelective(${tableBean.entityClassNameFirstLower});
+    int insert(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.insertSelective(${tableBean.entityClassNameFirstLower});
     }
 
     /**
@@ -55,8 +55,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ${tableBean.entityClassNameFirstLower}List
      */
     @Override
-    public void insertList(List<${tableBean.entityClassName}> ${tableBean.entityClassNameFirstLower}List) {
-        ${tableBean.mapperClassNameFirstLower}.insertList(${tableBean.entityClassNameFirstLower}List);
+    int insertList(List<${tableBean.entityClassName}> ${tableBean.entityClassNameFirstLower}List) {
+        return ${tableBean.mapperClassNameFirstLower}.insertList(${tableBean.entityClassNameFirstLower}List);
     }
 
     /**
@@ -65,8 +65,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ${tableBean.entityClassNameFirstLower}
      */
     @Override
-    public void update(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
-        ${tableBean.mapperClassNameFirstLower}.updateByPrimaryKeySelective(${tableBean.entityClassNameFirstLower});
+    int update(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+        return ${tableBean.mapperClassNameFirstLower}.updateByPrimaryKeySelective(${tableBean.entityClassNameFirstLower});
     }
 
     /**
@@ -75,8 +75,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param id
      */
     @Override
-    public void delete(${tableBean.pkColumnBean.javaType} id) {
-        ${tableBean.mapperClassNameFirstLower}.deleteByPrimaryKey(id);
+    int delete(${tableBean.pkColumnBean.javaType} id) {
+        return ${tableBean.mapperClassNameFirstLower}.deleteByPrimaryKey(id);
     }
 
     /**
@@ -85,8 +85,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ids
      */
     @Override
-    public void deleteByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
-        ${tableBean.mapperClassNameFirstLower}.deleteByIds(ids);
+    int deleteByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
+        return ${tableBean.mapperClassNameFirstLower}.deleteByIds(ids);
     }
 
     /**
@@ -95,8 +95,8 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ids
      */
     @Override
-    public void deleteByIds(${tableBean.pkColumnBean.javaType}[] ids) {
-        ${tableBean.mapperClassNameFirstLower}.deleteByIds(Arrays.asList(ids));
+    int deleteByIds(${tableBean.pkColumnBean.javaType}[] ids) {
+        return ${tableBean.mapperClassNameFirstLower}.deleteByIds(Arrays.asList(ids));
     }
 
     /**
@@ -105,11 +105,11 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @param ${tableBean.entityClassNameFirstLower}
      */
     @Override
-    public void saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+    int saveOrUpdate(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
         if (${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}() == null || get(${tableBean.entityClassNameFirstLower}.get${tableBean.pkColumnBean.javaNameFirstUpper}()) == null) {
-            insert(${tableBean.entityClassNameFirstLower});
+            return insert(${tableBean.entityClassNameFirstLower});
         } else {
-            update(${tableBean.entityClassNameFirstLower});
+            return update(${tableBean.entityClassNameFirstLower});
         }
     }
 
@@ -120,7 +120,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public List<${tableBean.entityClassName}> listByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
+    List<${tableBean.entityClassName}> listByIds(List<${tableBean.pkColumnBean.javaType}> ids) {
         return ${tableBean.mapperClassNameFirstLower}.selectByIds(ids);
     }
 
@@ -130,7 +130,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public List<${tableBean.entityClassName}> listByIds(${tableBean.pkColumnBean.javaType} [] ids) {
+    List<${tableBean.entityClassName}> listByIds(${tableBean.pkColumnBean.javaType} [] ids) {
         return ${tableBean.mapperClassNameFirstLower}.selectByIds(Arrays.asList(ids));
     }
 
@@ -141,7 +141,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public int count(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+    int count(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
         return ${tableBean.mapperClassNameFirstLower}.selectCount(${tableBean.entityClassNameFirstLower});
     }
 
@@ -151,7 +151,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public List<${tableBean.entityClassName}> listAll() {
+    List<${tableBean.entityClassName}> listAll() {
         return ${tableBean.mapperClassNameFirstLower}.selectAll();
     }
 
@@ -162,7 +162,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public List<${tableBean.entityClassName}> query(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+    List<${tableBean.entityClassName}> query(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
         return ${tableBean.mapperClassNameFirstLower}.select(${tableBean.entityClassNameFirstLower});
     }
 
@@ -173,7 +173,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public ${tableBean.entityClassName} queryOne(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
+    ${tableBean.entityClassName} queryOne(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}) {
         return ${tableBean.mapperClassNameFirstLower}.selectOne(${tableBean.entityClassNameFirstLower});
     }
 
@@ -186,7 +186,7 @@ public class ${tableBean.serviceClassName} implements ${tableBean.serviceApiClas
      * @return
      */
     @Override
-    public List<${tableBean.entityClassName}> queryOrderBy(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, String sortField, String sortOrder) {
+    List<${tableBean.entityClassName}> queryOrderBy(${tableBean.entityClassName} ${tableBean.entityClassNameFirstLower}, String sortField, String sortOrder) {
         return ${tableBean.mapperClassNameFirstLower}.queryOrderBy(${tableBean.entityClassNameFirstLower}, sortField, sortOrder);
     }
 
