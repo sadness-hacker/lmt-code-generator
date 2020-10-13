@@ -19,7 +19,7 @@
         <spring-boot-starter>2.0.6.RELEASE</spring-boot-starter>
 		<lombok>1.18.4</lombok>
         <pagehelper>5.1.7</pagehelper>
-        <junit>4.12</junit>
+        <junit>4.13.1</junit>
         <commons-io>2.6</commons-io>
         <h2>1.4.199</h2>
 	</properties>
