@@ -21,7 +21,7 @@
         <pagehelper>5.1.7</pagehelper>
         <junit>4.12</junit>
         <commons-io>2.6</commons-io>
-        <h2>1.4.199</h2>
+        <h2>2.0.206</h2>
 	</properties>
 	<dependencies>
         <dependency>
